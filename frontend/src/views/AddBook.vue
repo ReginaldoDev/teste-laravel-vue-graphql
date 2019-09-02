@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="addBook">
     <form action="#" method="POST" @submit.prevent="addBook">
       <div>
         <label>Title</label>:
@@ -55,17 +55,16 @@
 import addBook from '@/graphql/mutations/AddBook.gql';
 
 export default {
-    
   data() {
     return {
-      title: "",
-      author: "",
-      image: "",
-      description: "",
-      link: "",
+      title: '',
+      author: '',
+      image: '',
+      description: '',
+      link: '',
       featured: false,
       category_id: 1
-    };
+    }
   },
   methods: {
     addBook() {

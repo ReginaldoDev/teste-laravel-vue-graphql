@@ -9,11 +9,11 @@ mutation (
 ) {
   createBook (
     title: $title
-    author:  $author
+    author: $author
     image: $image
-    link: $link,
-    description: $description,
-    featured: $featured,
+    link: $link
+    description: $description
+    featured: $featured
     category_id: $category
   ) {
     id

@@ -13,9 +13,9 @@ mutation (
     title: $title
     author:  $author
     image: $image
-    link: $link,
-    description: $description,
-    featured: $featured,
+    link: $link
+    description: $description
+    featured: $featured
     category_id: $category
   ) {
     id

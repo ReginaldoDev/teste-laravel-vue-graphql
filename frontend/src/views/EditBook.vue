@@ -61,7 +61,7 @@ export default {
       title: "",
       author: "",
       image: "",
-      description: "",
+      description: "", 
       link: "",
       featured: false,
       category_id: 1,
@@ -78,7 +78,7 @@ export default {
           }
         }
       },
-      result({ data, loading, networkStatus }) {
+      result({ data}) {
         this.title = data.book.title
         this.author = data.book.author
         this.image = data.book.image
