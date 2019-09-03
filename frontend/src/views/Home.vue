@@ -2,7 +2,7 @@
   <div class="home">
     <router-link to="/books/add">Adicionar</router-link>
     <!-- Apollo Query -->
-    <ApolloQuery :query="categoriesQueryUser" :variables="{ id: 1 }">
+    <ApolloQuery :query="categoriesQueryUser" :variables="{ id: this.me.id }">
       <!-- The result will automatically updated -->
       <template slot-scope="{ result: { data, loading }, isLoading }">
         <!-- Some content -->
