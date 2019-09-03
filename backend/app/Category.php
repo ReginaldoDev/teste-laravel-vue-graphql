@@ -12,4 +12,12 @@ class Category extends Model
     {
         return $this->hasMany(Book::class);
     }
+    public function modules()
+    {
+        return $this->hasMany(Modules::class);
+    }
+    public function userModules()
+    {
+        return $this->hasMany(UserModules::class);
+    }
 }

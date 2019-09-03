@@ -17,6 +17,11 @@ type Query {
     category(id: ID @eq): Category @find
 
     me: User @middleware(checks:["auth:api"]) @auth
+
+    modules: [Modules] @all
+
+    userCategorys: [UserCategorys] @all
+    buscaComplexQuery(user_id: Int!): [UserCategorys]
 }
 
 type Mutation {
@@ -37,14 +42,14 @@ type Mutation {
 
     createCategory(
         name: String @rules(apply: ["required","unique:categories,name"])
-    ): Category @create
+    ): Category @create(model: "App\\Category")@middleware(checks:["auth:api"])
     updateCategory(
         id: ID @rules(apply: ["required"])
         name: String @rules(apply: ["required","unique:categories,name"])
-    ): Category @update
+    ): Category @update(model: "App\\Category")@middleware(checks:["auth:api"])
     deleteCategory(
         id: ID! @rules(apply: ["required"])
-    ): Category @delete
+    ): Category @delete(model: "App\\Category")@middleware(checks:["auth:api"])
 
     createBook(
         title: String! @rules(apply: ["required"])
@@ -54,7 +59,7 @@ type Mutation {
         description: String 
         featured: Boolean 
         category_id: Int!
-    ): Book @create
+    ): Book @create(model: "App\\Book")@middleware(checks:["auth:api"])
     updateBook(
         id: ID @rules(apply: ["required"])
         title: String! @rules(apply: ["required"])
@@ -64,10 +69,11 @@ type Mutation {
         description: String 
         featured: Boolean 
         category_id: Int!
-    ): Book @update
+    ): Book @update(model: "App\\Book")@middleware(checks:["auth:api"])
     deleteBook(
         id: ID! @rules(apply: ["required"])
-    ): Book @delete
+    ): Book @delete(model: "App\\Book")@middleware(checks:["auth:api"])
+
 }
 
 type User {
@@ -92,5 +98,16 @@ type Book {
     link: String
     description: String
     featured: Boolean
+    category: Category! @belongsTo
+}
+
+type Modules {
+    id: ID!
+    name: String!
+    category: Category! @belongsTo
+}
+
+type UserCategorys {
+    user: User! @belongsTo
     category: Category! @belongsTo
 }

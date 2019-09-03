@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
+      <router-link to="/category/add">Adicionar category</router-link> |
       <router-link to="/books/add">Adicionar</router-link> |
       <router-link to="/login">Login</router-link> |
       <a href="#" @click.prevent="logout">Logout</a>

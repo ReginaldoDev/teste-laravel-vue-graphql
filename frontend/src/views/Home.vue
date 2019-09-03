@@ -2,7 +2,7 @@
   <div class="home">
     <router-link to="/books/add">Adicionar</router-link>
     <!-- Apollo Query -->
-    <ApolloQuery :query="categoriesQuery">
+    <ApolloQuery :query="categoriesQueryUser" :variables="{ id: 1 }">
       <!-- The result will automatically updated -->
       <template slot-scope="{ result: { data, loading }, isLoading }">
         <!-- Some content -->
@@ -12,11 +12,11 @@
           <a href="#" @click.prevent="selectCategory('featured')" class="link-margin">Featured</a>
           <a
             href="#"
-            v-for="category of data.categories"
+            v-for="category of data.buscaComplexQuery"
             :key="category.id"
             class="link-margin"
             @click.prevent="selectCategory(category.id)"
-          >{{ category.id }}.{{ category.name }}</a>
+          >{{ category.category.id }}.{{ category.category.name }}</a>
         </div>
       </template>
     </ApolloQuery>
@@ -30,7 +30,7 @@
           <div v-for="book of data.books" :key="book.id">
             <router-link :to="`/books/${book.id}`">{{ book.id }}.{{ book.title }}</router-link>
             <div>{{ book.author }}</div>
-            <img :src="`${book.image}`" alt="cover image">
+            <img :src="`${book.image}`" alt="cover image" />
           </div>
         </div>
       </template>
@@ -73,19 +73,23 @@ import categoryQuery from "@/graphql/queries/Category.gql";
 import categoriesQuery from "@/graphql/queries/Categories.gql";
 import booksQuery from "@/graphql/queries/Books.gql";
 import booksFeaturedQuery from "@/graphql/queries/BooksFeatured.gql";
+import categoriesQueryUser from "@/graphql/queries/CategoriesUser.gql";
+import gql from "graphql-tag";
 
 export default {
   name: "home",
   components: {},
   data() {
     return {
+      categoriesQueryUser,
       categoryQuery,
       categoriesQuery,
       booksQuery,
       booksFeaturedQuery,
       selectedCategory: "all",
       query: booksQuery,
-      categories: []
+      categories: [],
+      me: null
     };
   },
   methods: {
@@ -100,6 +104,17 @@ export default {
 
       this.selectedCategory = category;
     }
+  },
+  apollo: {
+    me: gql`
+      query {
+        me {
+          id
+          name
+          email
+        }
+      }
+    `
   }
 };
 </script>

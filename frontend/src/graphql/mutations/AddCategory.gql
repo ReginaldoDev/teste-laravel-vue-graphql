@@ -1,0 +1,10 @@
+mutation (
+    $name: String!
+) {
+  createCategory (
+    name: $name
+  ) {
+    id
+    name
+  }
+}

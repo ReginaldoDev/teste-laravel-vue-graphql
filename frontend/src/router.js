@@ -42,6 +42,11 @@ export default new Router({
       path: '/protected',
       name: 'protected',
       component: () => import('./views/Protected.vue')
+    },
+    {
+      path: '/category/add',
+      name: 'addCategory',
+      component: () => import('./views/AddCategory.vue')
     }
   ]
 })

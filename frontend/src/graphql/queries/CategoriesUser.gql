@@ -1,0 +1,8 @@
+query ($id: Int!){
+  buscaComplexQuery(user_id: $id) {
+    category {
+  	  id
+      name
+  	}
+  }
+}
